@@ -34,7 +34,9 @@ const products = [
         price: 799000,
         category: "Sweater",
         description: "Sweater rajutan wol dengan desain modern.",
-        image: ""
+        image: "",
+        colors: ["black", "navy", "white"],
+        sizes: ["M", "L", "XL"]
     },
     {
         id: 5,
@@ -70,7 +72,9 @@ const products = [
         price: 649000,
         category: "Sweater",
         description: "Sweater hoodie dengan bahan fleece yang hangat.",
-        image: ""
+        image: "",
+        colors: ["black", "navy", "white"],
+        sizes: ["M", "L", "XL"]
     },
     {
         id: 9,
@@ -342,60 +346,112 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'none';
         }
     });
-    
-    // Form pesanan custom
-    const orderForm = document.getElementById('custom-order-form');
-    orderForm.addEventListener('submit', function(e) {
+
+    // Cart dropdown toggle and tab functionality
+    const cartLink = document.querySelector('.cart-link');
+    const cartDropdown = document.querySelector('.cart-dropdown');
+    const cartTabs = document.querySelectorAll('.cart-tab');
+    const cartTabContents = document.querySelectorAll('.cart-tab-content');
+    const cartItemsContainer = document.querySelector('.cart-items-container');
+    const cartTotal = document.querySelector('.cart-total');
+    const shoppingListContainer = document.querySelector('.shopping-list-items');
+    const shoppingListInput = document.querySelector('.shopping-list-input');
+    const addToListBtn = document.querySelector('.add-to-list-btn');
+
+    cartLink.addEventListener('click', function(e) {
         e.preventDefault();
-        alert('Terima kasih atas permintaan pesanan custom Anda! Kami akan menghubungi Anda segera.');
-        modal.style.display = 'none';
-        orderForm.reset();
+        if (cartDropdown.style.display === 'block') {
+            cartDropdown.style.display = 'none';
+        } else {
+            cartDropdown.style.display = 'block';
+            renderCartItems();
+        }
     });
-});
 
-// Style untuk notifikasi keranjang
-const style = document.createElement('style');
-style.textContent = `
-.cart-notification {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #1a3e72;
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    animation: slideIn 0.3s ease-out;
-    z-index: 1000;
-}
+    // Tab switching
+    cartTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            cartTabs.forEach(t => t.classList.remove('active'));
+            cartTabContents.forEach(content => content.style.display = 'none');
 
-.cart-notification.fade-out {
-    animation: fadeOut 0.5s ease-out;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-`;
-document.head.appendChild(style);
-
-document.addEventListener('DOMContentLoaded', () => {
-    const belanjaButton = document.getElementById('belanja-sekarang');
-
-    if (belanjaButton) {
-        belanjaButton.addEventListener('click', () => {
-            belanjaButton.classList.add('active');
-
-            // Remove the active class after the animation ends
-            setTimeout(() => {
-                belanjaButton.classList.remove('active');
-            }, 500); // Match the duration of the animation
+            this.classList.add('active');
+            const tabName = this.getAttribute('data-tab');
+            const activeContent = document.querySelector(`.cart-tab-content[data-tab-content="${tabName}"]`);
+            if (activeContent) {
+                activeContent.style.display = 'block';
+            }
         });
+    });
+
+    // Render cart items in cart tab
+    function renderCartItems() {
+        cartItemsContainer.innerHTML = '';
+        let totalPrice = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Keranjang kosong.</p>';
+            cartTotal.textContent = 'Total: Rp 0';
+            return;
+        }
+
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'cart-item';
+            itemDiv.innerHTML = `
+                <div class="cart-item-info">
+                    <span class="cart-item-name">${item.name}</span>
+                    <span class="cart-item-details">Ukuran: ${item.size || '-'}, Warna: ${item.color || '-'}</span>
+                    <span class="cart-item-quantity">Jumlah: ${item.quantity}</span>
+                    <span class="cart-item-price">${formatRupiah(itemTotal)}</span>
+                </div>
+            `;
+            cartItemsContainer.appendChild(itemDiv);
+        });
+
+        cartTotal.textContent = 'Total: ' + formatRupiah(totalPrice);
     }
+
+    // Shopping list functionality
+    addToListBtn.addEventListener('click', function() {
+        const itemText = shoppingListInput.value.trim();
+        if (itemText === '') return;
+
+        const li = document.createElement('li');
+        li.textContent = itemText;
+        shoppingListContainer.appendChild(li);
+        shoppingListInput.value = '';
+    });
+
+    // Close cart dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!cartDropdown.contains(e.target) && !cartLink.contains(e.target)) {
+            cartDropdown.style.display = 'none';
+        }
+    });
+
+    // Add event listener for checkout button to redirect to payment page
+    document.addEventListener('DOMContentLoaded', () => {
+        const belanjaButton = document.getElementById('belanja-sekarang');
+
+        if (belanjaButton) {
+            belanjaButton.addEventListener('click', () => {
+                belanjaButton.classList.add('active');
+
+                // Remove the active class after the animation ends
+                setTimeout(() => {
+                    belanjaButton.classList.remove('active');
+                }, 500); // Match the duration of the animation
+            });
+        }
+
+        const checkoutButton = document.querySelector('.checkout-btn');
+        if (checkoutButton) {
+            checkoutButton.addEventListener('click', () => {
+                window.location.href = 'payment_address.html';
+            });
+        }
+    });
 });
