@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Payment and Address - ihtiar</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <div class="logo">ihtiar</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="nav-link">Beranda</a></li>
+                <li><a href="#" class="nav-link">Belanja</a></li>
+                <li><a href="#" class="nav-link">Pesanan Custom</a></li>
+                <li><a href="#" class="nav-link">Tentang</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="payment-address-section">
+            <h1>Alamat dan Pembayaran</h1>
+            <form id="payment-address-form">
+                <fieldset>
+                    <legend>Alamat Pengiriman</legend>
+                    <label for="full-name">Nama Lengkap:</label>
+                    <input type="text" id="full-name" name="fullName" required />
+
+                    <label for="address-line1">Alamat 1:</label>
+                    <input type="text" id="address-line1" name="addressLine1" required />
+
+                    <label for="address-line2">Alamat 2:</label>
+                    <input type="text" id="address-line2" name="addressLine2" />
+
+                    <label for="city">Kota:</label>
+                    <input type="text" id="city" name="city" required />
+
+                    <label for="postal-code">Kode Pos:</label>
+                    <input type="text" id="postal-code" name="postalCode" required />
+
+                    <label for="phone">Nomor Telepon:</label>
+                    <input type="tel" id="phone" name="phone" required />
+                </fieldset>
+
+                <fieldset>
+                    <legend>Informasi Pembayaran</legend>
+                    <label for="card-name">Nama pada Kartu:</label>
+                    <input type="text" id="card-name" name="cardName" required />
+
+                    <label for="card-number">Nomor Kartu:</label>
+                    <input type="text" id="card-number" name="cardNumber" required pattern="\d{16}" maxlength="16" />
+
+                    <label for="expiry-date">Tanggal Kadaluarsa:</label>
+                    <input type="month" id="expiry-date" name="expiryDate" required />
+
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv" required pattern="\d{3}" maxlength="3" />
+                </fieldset>
+
+                <button type="submit" class="checkout-btn">Bayar Sekarang</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 hendra hermawan . Hak cipta dilindungi.</p>
+    </footer>
+
+    <script>
+        document.getElementById('payment-address-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Pembayaran dan alamat telah dikirim. Terima kasih atas pesanan Anda!');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
