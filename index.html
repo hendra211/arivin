@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ihtiar - Toko fashion premium dengan jaket, tas, t-shirt, dan sweater berkualitas tinggi">
+    <title>ihtiar - Fashion Premium</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+</head>
+<body>
+    <header role="banner">
+        <div class="logo">ihtiar</div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Cari produk...">
+            <button id="search-button"><i class="fas fa-search"></i></button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Belanja <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#" data-category="Jaket">Jaket</a>
+                        <a href="#" data-category="Tas">Tas</a>
+                        <a href="#" data-category="T-Shirt">T-Shirt</a>
+                        <a href="#" data-category="Sweater">Sweater</a>
+                    </div>
+                </li>
+                <li><a href="#" class="nav-link">Pesanan Custom</a></li>
+                <li><a href="#" class="nav-link">Tentang</a></li>
+            </ul>
+        </nav>
+        <div class="cart-menu-container">
+            <a href="#" class="nav-link cart-link">
+                <i class="fas fa-shopping-cart"></i> 
+                <span class="cart-count">0</span>
+            </a>
+            <div class="cart-dropdown">
+                <div class="cart-tabs">
+                    <button class="cart-tab active" data-tab="cart">Keranjang</button>
+                    <button class="cart-tab" data-tab="shopping-list">Daftar Belanja</button>
+                </div>
+                <div class="cart-tab-content" data-tab-content="cart">
+                    <div class="cart-items-container">
+                        <!-- Cart items will be populated here via JavaScript -->
+                    </div>
+                    <div class="cart-summary">
+                        <div class="cart-total">Total: Rp 0</div>
+                        <button class="checkout-btn">Checkout</button>
+                    </div>
+                </div>
+                <div class="cart-tab-content" data-tab-content="shopping-list" style="display:none">
+                    <div class="shopping-list-container">
+                        <input type="text" class="shopping-list-input" placeholder="Tambah item ke daftar...">
+                        <button class="add-to-list-btn">+ Tambah</button>
+                        <ul class="shopping-list-items">
+                            <!-- Shopping list items will be populated here via JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" style="background-color: #1a3e72;">
+        <h1>Koleksi Premium ihtiar</h1>
+        <p>Temukan jaket, tas, t-shirt, dan sweater eksklusif kami</p>
+<button id="belanja-sekarang" class="hero-button laser-wipe">Belanja Sekarang</button>
+    </section>
+    <section class="products">
+        <h2>Produk Kami</h2>
+        <div class="category-filter">
+            <button class="category-button active">Semua</button>
+            <button class="category-button">Jaket</button>
+            <button class="category-button">Tas</button>
+            <button class="category-button">T-Shirt</button>
+            <button class="category-button">Sweater</button>
+        </div>
+        <div class="product-grid" id="product-container">
+            <!-- Produk akan dimuat di sini via JavaScript -->
+        </div>
+    </section>
+
+    <section class="custom-order">
+        <h2>Pesanan Custom</h2>
+        <p>Ingin sesuatu yang unik? Kami bisa membuatkan khusus untuk Anda.</p>
+        <button id="custom-order-btn">Request Pesanan Custom</button>
+        <div id="custom-order-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Permintaan Pesanan Custom</h3>
+                <form id="custom-order-form">
+                    <input type="text" placeholder="Nama Anda" required>
+                    <input type="email" placeholder="no whatsapp" required>
+                    <select required>
+                        <option value="">Pilih Jenis Produk</option>
+                        <option value="jacket">Jaket</option>
+                        <option value="bag">Tas</option>
+                        <option value="T-Shirt">T-Shirt</option>
+                        <option value="sweater">Sweater</option>
+                    </select>
+                    <textarea placeholder="Deskripsi kebutuhan custom Anda" required></textarea>
+                    <button type="submit">Kirim Permintaan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Belanja</h3>
+                <ul>
+                    <li><a href="#" class="footer-link">Semua Produk</a></li>
+                    <li><a href="#" class="footer-link">Produk Baru</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Bantuan</h3>
+                <ul>
+                    <li><a href="#" class="footer-link">Pengiriman</a></li>
+                    <li><a href="#" class="footer-link">Pengembalian</a></li>
+                    <li><a href="https://shopee.co.id" target="_blank" class="footer-link"><i class="fas fa-store"></i> Shopee</a></li>
+                    <li><a href="https://www.tokopedia.com" target="_blank" class="footer-link"><i class="fas fa-store-alt"></i> Tokopedia</a></li>
+                    <li><a href="https://wa.me/6281234567890" target="_blank" class="footer-link"><i class="fas fa-whatsapp"></i> WhatsApp</a></li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2025 hendra hermawan . Hak cipta dilindungi.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Fixed bottom center buttons for Shopee, Tokopedia, WhatsApp -->
+    <div class="fixed-bottom-buttons">
+        <a href="https://shopee.co.id" target="_blank" class="fixed-button shopee" aria-label="Shopee">
+            <i class="fas fa-store"></i>
+        </a>
+        <a href="https://www.tokopedia.com" target="_blank" class="fixed-button tokopedia" aria-label="Tokopedia">
+            <i class="fas fa-store-alt"></i>
+        </a>
+        <a href="https://wa.me/6281234567890" target="_blank" class="fixed-button whatsapp" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+</body>
+</html>
